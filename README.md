@@ -11,5 +11,5 @@ Together Do is a Flutter mobile application developed using the MVVM architectur
 - View home care tips
 
 # Screenshots
-<img width="1918" height="755" alt="Image" src="https://github.com/user-attachments/assets/eb9187c3-e56d-43e2-aea6-30bbda46591e" />
+<img width="1918" height="730" alt="Image" src="https://github.com/user-attachments/assets/117b2001-1c4d-4cf5-a0f1-495a076f826a" />
 <img width="1918" height="730" alt="Image" src="https://github.com/user-attachments/assets/417344cb-c459-417b-83d9-c44c58d6df2e" />
