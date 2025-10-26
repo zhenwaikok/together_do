@@ -1,16 +1,15 @@
-# mpma_assignment
+# 🧹 Project Overview – Together Do
+Together Do is a Flutter mobile application developed using the MVVM architecture with Firebase as the backend service. It aims to simplify and organize household chore management by allowing users to create and join spaces where tasks can be assigned, tracked, and updated collaboratively. Additionally, the app integrates the YouTube Data API to display awareness and motivational videos related to teamwork and household management.
 
-A new Flutter project.
+# ✨ Key Features
+- User authentication (sign up, login, reset password)
+- Create, join, or manage spaces via space code
+- Create, assign, edit, or delete chores
+- Update chore status and track progress
+- View and manage members within a space
+- Edit profile and change password
+- View home care tips
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Screenshots
+<img width="1918" height="730" alt="Image" src="https://github.com/user-attachments/assets/117b2001-1c4d-4cf5-a0f1-495a076f826a" />
+<img width="1918" height="730" alt="Image" src="https://github.com/user-attachments/assets/417344cb-c459-417b-83d9-c44c58d6df2e" />
