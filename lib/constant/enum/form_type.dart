@@ -31,3 +31,5 @@ enum CreateEditChoreFormFieldsEnum {
 enum CreateEditSpaceFormFieldsEnum { spacePhoto, name, description }
 
 enum JoinSpaceFormFieldsEnum { spaceCode }
+
+enum ChatFormFieldsEnum { message }

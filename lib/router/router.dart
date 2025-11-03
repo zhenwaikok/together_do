@@ -33,6 +33,7 @@ class AppRouter extends RootStackRouter {
           AutoRoute(page: SpacesRoute.page),
           AutoRoute(page: HomeTipsRoute.page),
           AutoRoute(page: MyTaskRoute.page),
+          AutoRoute(page: ChatRoute.page),
           AutoRoute(page: ProfileRoute.page),
         ],
       ),
@@ -45,6 +46,7 @@ class AppRouter extends RootStackRouter {
       AutoRoute(page: ChangePasswordRoute.page),
       AutoRoute(page: EditProfileRoute.page),
       AutoRoute(page: ChoreDetailsRoute.page),
+      AutoRoute(page: ChatRoomRoute.page),
     ];
   }
 }

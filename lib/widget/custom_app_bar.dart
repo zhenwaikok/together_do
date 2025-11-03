@@ -10,12 +10,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.isBackButtonVisible,
     this.onPressed,
     this.actions,
+    this.child,
   });
 
   final String? title;
   final VoidCallback? onPressed;
   final List<Widget>? actions;
   final bool isBackButtonVisible;
+  final Widget? child;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -25,12 +27,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: ColorManager.whiteColor,
       surfaceTintColor: Colors.transparent,
-      title: Text(
-        title ?? '',
-        style: _Styles.titleTextStyle,
-        maxLines: StylesManager.maxTextLines1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      title:
+          child ??
+          Text(
+            title ?? '',
+            style: _Styles.titleTextStyle,
+            maxLines: StylesManager.maxTextLines1,
+            overflow: TextOverflow.ellipsis,
+          ),
       leading: isBackButtonVisible
           ? getBackButton(onPressed: onPressed ?? () {})
           : null,

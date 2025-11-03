@@ -1,11 +1,21 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_android/image_picker_android.dart';
+import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:mpma_assignment/constant/color_manager.dart';
 import 'package:mpma_assignment/constant/font_manager.dart';
 import 'package:mpma_assignment/widget/adaptive_alert_dialog.dart';
 import 'package:mpma_assignment/widget/custom_text_field.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+
+enum MediaType { image, video, document, unknown }
 
 class WidgetUtil {
   static Future<T?> showAlertDialog<T>(
@@ -107,6 +117,61 @@ class WidgetUtil {
         return ColorManager.primary;
       default:
         return ColorManager.primary;
+    }
+  }
+
+  static Future<List<XFile>> pickMultipleMedias({required int limit}) async {
+    final imagePickerImplementation = ImagePickerPlatform.instance;
+    if (imagePickerImplementation is ImagePickerAndroid) {
+      imagePickerImplementation.useAndroidPhotoPicker = true;
+    }
+
+    final ImagePicker imagePicker = ImagePicker();
+    final List<XFile> medias = await imagePicker.pickMultipleMedia(
+      limit: limit,
+    );
+    return medias;
+  }
+
+  static Future<List<XFile>> pickFiles({
+    required List<String>? allowedExtensions,
+  }) async {
+    final result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.custom,
+      allowedExtensions: allowedExtensions,
+    );
+
+    if (result == null) return [];
+
+    return result.paths.whereType<String>().map((path) => XFile(path)).toList();
+  }
+
+  static Future<Uint8List?> generateVideoThumbnail({
+    required File videoFile,
+  }) async {
+    final thumbnail = await VideoThumbnail.thumbnailData(
+      video: videoFile.path,
+      imageFormat: ImageFormat.PNG,
+      maxWidth: 128,
+      quality: 100,
+    );
+    return thumbnail;
+  }
+
+  static MediaType getMediaType(String path) {
+    final lowerPath = path.toLowerCase();
+
+    if (lowerPath.endsWith('.jpg') ||
+        lowerPath.endsWith('.jpeg') ||
+        lowerPath.endsWith('.png')) {
+      return MediaType.image;
+    } else if (lowerPath.endsWith('.mp4') || lowerPath.endsWith('.mov')) {
+      return MediaType.video;
+    } else if (lowerPath.endsWith('.pdf') || lowerPath.endsWith('.docx')) {
+      return MediaType.document;
+    } else {
+      return MediaType.unknown;
     }
   }
 }

@@ -38,6 +38,10 @@ extension StringExtension on String {
     return DateFormat('EEEE').format(date);
   }
 
+  static String timeFormatter(DateTime date) {
+    return DateFormat('hh:mm a').format(date);
+  }
+
   static String getButtonLabel(String status) {
     return switch (status) {
       'Pending' => 'I\' m doing it!',
