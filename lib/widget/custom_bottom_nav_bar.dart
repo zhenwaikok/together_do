@@ -74,8 +74,9 @@ extension _WidgetFactories on _CustomBottomNavBarState {
     return [
       HomeRoute(),
       SpacesRoute(),
-      HomeTipsRoute(),
+      // HomeTipsRoute(),
       MyTaskRoute(),
+      ChatRoute(),
       ProfileRoute(),
     ];
   }
@@ -84,8 +85,9 @@ extension _WidgetFactories on _CustomBottomNavBarState {
     return [
       getBottomNavBarIcon(icon: Icons.home, label: 'Home'),
       getBottomNavBarIcon(icon: Icons.groups_rounded, label: 'Spaces'),
-      getBottomNavBarIcon(icon: Icons.newspaper, label: 'Tips'),
+      // getBottomNavBarIcon(icon: Icons.newspaper, label: 'Tips'),
       getBottomNavBarIcon(icon: Icons.task, label: 'My Tasks'),
+      getBottomNavBarIcon(icon: Icons.chat_bubble, label: 'Chat'),
       getBottomNavBarIcon(icon: Icons.person, label: 'Profile'),
     ];
   }

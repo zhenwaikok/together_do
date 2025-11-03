@@ -26,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false,
     this.initialValue,
     this.labelText,
+    this.hintText,
   });
 
   final String formName;
@@ -47,6 +48,7 @@ class CustomTextField extends StatefulWidget {
   final bool? isPassword;
   final String? initialValue;
   final String? labelText;
+  final String? hintText;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -59,13 +61,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (widget.needTitle ?? true)
+        if (widget.needTitle ?? true) ...[
           getTitle(
             title: widget.title ?? '',
             fontSize: widget.fontSize ?? 0,
             color: widget.color ?? Colors.transparent,
           ),
-        SizedBox(height: 10),
+          SizedBox(height: 10),
+        ],
         getTextField(name: widget.formName),
       ],
     );
@@ -100,6 +103,7 @@ extension _WidgetFactories on _CustomTextFieldState {
       controller: widget.controller,
       readOnly: widget.readonly ?? false,
       decoration: InputDecoration(
+        hintText: widget.hintText,
         labelText: widget.labelText,
         labelStyle: _Styles.labelTextStyle,
         contentPadding: _Styles.contentPadding,

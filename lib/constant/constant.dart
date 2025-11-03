@@ -142,3 +142,9 @@ class FilterItems {
     'Completed',
   ];
 }
+
+class Constant {
+  Constant._();
+
+  static const int maxMediaSelectionLimit = 5;
+}
