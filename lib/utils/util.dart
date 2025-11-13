@@ -168,7 +168,7 @@ class WidgetUtil {
       return MediaType.image;
     } else if (lowerPath.endsWith('.mp4') || lowerPath.endsWith('.mov')) {
       return MediaType.video;
-    } else if (lowerPath.endsWith('.pdf') || lowerPath.endsWith('.docx')) {
+    } else if (lowerPath.endsWith('.pdf')) {
       return MediaType.document;
     } else {
       return MediaType.unknown;

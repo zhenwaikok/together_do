@@ -39,6 +39,7 @@ abstract class BaseServices {
   Future<MyResponse> callAPI({
     required HttpMethod httpMethod,
     required String path,
+    String? savePath,
     dynamic postBody,
   }) async {
     try {
@@ -58,6 +59,9 @@ abstract class BaseServices {
           break;
         case HttpMethod.delete:
           response = await dio?.delete(path);
+          break;
+        case HttpMethod.download:
+          response = await dio?.download(path, savePath);
           break;
       }
 

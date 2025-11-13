@@ -11,12 +11,17 @@ import 'package:mpma_assignment/constant/enum/form_type.dart';
 import 'package:mpma_assignment/constant/font_manager.dart';
 import 'package:mpma_assignment/constant/styles_manager.dart';
 import 'package:mpma_assignment/utils/util.dart';
+import 'package:mpma_assignment/viewmodel/chat_view_model.dart';
 import 'package:mpma_assignment/widget/bottom_sheet_action.dart';
 import 'package:mpma_assignment/widget/custom_app_bar.dart';
 import 'package:mpma_assignment/widget/custom_profile_image.dart';
 import 'package:mpma_assignment/widget/custom_text_field.dart';
+import 'package:mpma_assignment/widget/document_message_bubble.dart';
+import 'package:mpma_assignment/widget/image_message_bubble.dart';
 import 'package:mpma_assignment/widget/text_message_bubble.dart';
 import 'package:mpma_assignment/widget/touchable_capacity.dart';
+import 'package:mpma_assignment/widget/video_message_bubble.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class ChatRoomScreen extends BaseStatefulPage {
@@ -140,9 +145,7 @@ extension _Actions on _ChatRoomScreenState {
             'You can select up to ${Constant.maxMediaSelectionLimit} media files only.',
       );
     } else {
-      final results = await WidgetUtil.pickFiles(
-        allowedExtensions: ['pdf', 'docx'],
-      );
+      final results = await WidgetUtil.pickFiles(allowedExtensions: ['pdf']);
 
       if (results.isNotEmpty) {
         _setState(() {
@@ -164,6 +167,13 @@ extension _Actions on _ChatRoomScreenState {
     _setState(() {
       selectedMedia.removeAt(index);
     });
+  }
+
+  Future<void> onDocumentPressed() async {
+    await tryCatch(
+      context,
+      () => context.read<ChatViewModel>().downloadDocument(),
+    );
   }
 }
 
@@ -219,13 +229,33 @@ extension _WidgetFactories on _ChatRoomScreenState {
 
   Widget getMessageList() {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 2,
       itemBuilder: (context, index) {
-        return TextMessageBubble(
-          message:
-              'asdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdas',
-          isMe: false,
+        // return TextMessageBubble(
+        //   message:
+        //       'asdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdasasdas',
+        //   isMe: false,
+        //   createdTime: DateTime.now(),
+        // );
+        // return ImageMessageBubble(
+        //   imageURL:
+        //       'https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169',
+        //   isMe: true,
+        //   createdTime: DateTime.now(),
+        // );
+
+        // return VideoMessageBubble(
+        //   videoURL:
+        //       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+        //   isMe: true,
+        //   createdTime: DateTime.now(),
+        // );
+
+        return DocumentMessageBubble(
+          isMe: true,
           createdTime: DateTime.now(),
+          documentName: 'SampleDocument.pdf',
+          onTap: onDocumentPressed,
         );
       },
     );

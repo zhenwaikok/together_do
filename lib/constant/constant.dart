@@ -1,9 +1,11 @@
 import 'package:mpma_assignment/constant/images.dart';
+import 'package:mpma_assignment/repository/chat_document_download_repository.dart';
 import 'package:mpma_assignment/repository/chore_repository.dart';
 import 'package:mpma_assignment/repository/firebase_repository.dart';
 import 'package:mpma_assignment/repository/home_tips_repository.dart';
 import 'package:mpma_assignment/repository/space_repository.dart';
 import 'package:mpma_assignment/repository/user_repository.dart';
+import 'package:mpma_assignment/services/chat_document_download_services.dart';
 import 'package:mpma_assignment/services/chore_services.dart';
 import 'package:mpma_assignment/services/firebase_services.dart';
 import 'package:mpma_assignment/services/home_tips_services.dart';
@@ -11,6 +13,7 @@ import 'package:mpma_assignment/services/space_services.dart';
 import 'package:mpma_assignment/services/user_services.dart';
 import 'package:mpma_assignment/utils/shared_preference_handler.dart';
 import 'package:mpma_assignment/view/onboarding_screen.dart';
+import 'package:mpma_assignment/viewmodel/chat_view_model.dart';
 import 'package:mpma_assignment/viewmodel/chore_view_model.dart';
 import 'package:mpma_assignment/viewmodel/firebase_view_model.dart';
 import 'package:mpma_assignment/viewmodel/home_screen_view_model.dart';
@@ -21,7 +24,7 @@ import 'package:mpma_assignment/viewmodel/user_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-enum HttpMethod { get, post, put, delete }
+enum HttpMethod { get, post, put, delete, download }
 
 class EnvValues {
   EnvValues._();
@@ -75,6 +78,13 @@ List<SingleChildWidget> providerAssets() => [
     value: HomeScreenViewModel(
       choreRepository: ChoreRepository(choreServices: ChoreServices()),
       spaceRepository: SpaceRepository(spaceServices: SpaceServices()),
+    ),
+  ),
+  ChangeNotifierProvider.value(
+    value: ChatViewModel(
+      chatDocumentDownloadRepository: ChatDocumentDownloadRepository(
+        chatDocumentDownloadServices: ChatDocumentDownloadServices(),
+      ),
     ),
   ),
 ];
