@@ -63,12 +63,12 @@ extension _WidgetFactories on ChatCardWrapper {
   }) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width * 0.6,
+        maxWidth: MediaQuery.of(context).size.width * 0.5,
       ),
       child: Container(
         padding: _Styles.messageCardPadding,
         decoration: BoxDecoration(
-          color: isMe ? ColorManager.primary2 : ColorManager.lightGreyColor2,
+          color: isMe ? ColorManager.primary3 : ColorManager.lightGreyColor2,
           borderRadius: _Styles.messageCardBorderRadius,
         ),
         child: Column(
@@ -88,7 +88,7 @@ extension _WidgetFactories on ChatCardWrapper {
       alignment: Alignment.centerLeft,
       child: Text(
         StringExtension.timeFormatter(time),
-        style: _Styles.createdTimeTextStyle(isMe: isMe),
+        style: _Styles.createdTimeTextStyle,
       ),
     );
   }
@@ -109,9 +109,9 @@ class _Styles {
 
   static final messageCardBorderRadius = BorderRadius.circular(10);
 
-  static TextStyle createdTimeTextStyle({required bool isMe}) => TextStyle(
+  static const createdTimeTextStyle = TextStyle(
     fontSize: 13,
     fontWeight: FontWeightManager.regular,
-    color: isMe ? ColorManager.whiteColor : ColorManager.blackColor,
+    color: ColorManager.blackColor,
   );
 }
