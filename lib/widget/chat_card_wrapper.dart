@@ -63,7 +63,7 @@ extension _WidgetFactories on ChatCardWrapper {
   }) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width * 0.5,
+        maxWidth: MediaQuery.of(context).size.width * 0.6,
       ),
       child: Container(
         padding: _Styles.messageCardPadding,

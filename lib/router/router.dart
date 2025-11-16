@@ -1,8 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mpma_assignment/router/router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends RootStackRouter {
+  AppRouter({required this.navigatorKeys});
+
+  final GlobalKey<NavigatorState> navigatorKeys;
+
+  @override
+  GlobalKey<NavigatorState> get navigatorKey => navigatorKeys;
+
   @override
   RouteType get defaultRouteType => const RouteType.cupertino();
 

@@ -22,6 +22,8 @@ import 'package:mpma_assignment/widget/text_message_bubble.dart';
 import 'package:mpma_assignment/widget/touchable_capacity.dart';
 import 'package:mpma_assignment/widget/video_message_bubble.dart';
 import 'package:provider/provider.dart';
+import 'package:zego_uikit/zego_uikit.dart' hide MediaType;
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 @RoutePage()
 class ChatRoomScreen extends BaseStatefulPage {
@@ -202,28 +204,33 @@ extension _WidgetFactories on _ChatRoomScreenState {
       padding: _Styles.actionPadding,
       child: Row(
         children: [
-          getIconButton(icon: Icons.call, onPressed: () {}),
-          SizedBox(width: 10),
-          getIconButton(icon: Icons.video_chat, onPressed: () {}),
+          getCallButton(
+            isVideoCall: false,
+            receiverID: 'MWXfUSlHPVfF07QpgTAW0eS4XIt2',
+            receiverName: 'zhenwai',
+          ),
+          getCallButton(
+            isVideoCall: true,
+            receiverID: 'MWXfUSlHPVfF07QpgTAW0eS4XIt2',
+            receiverName: 'zhenwai',
+          ),
         ],
       ),
     );
   }
 
-  Widget getIconButton({
-    required IconData icon,
-    required VoidCallback onPressed,
+  Widget getCallButton({
+    required isVideoCall,
+    required String receiverID,
+    required String receiverName,
   }) {
-    return TouchableOpacity(
-      onPressed: onPressed,
-      child: Container(
-        padding: _Styles.actionButtonPadding,
-        decoration: BoxDecoration(
-          color: ColorManager.primary,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(icon, color: ColorManager.whiteColor),
-      ),
+    return ZegoSendCallInvitationButton(
+      resourceID: 'zego_call',
+      iconSize: _Styles.callIconSize,
+      buttonSize: _Styles.callButtonSize,
+      invitees: [ZegoUIKitUser(id: receiverID, name: receiverName)],
+      isVideoCall: isVideoCall,
+      onPressed: (code, message, errorInvites) {},
     );
   }
 
@@ -244,19 +251,19 @@ extension _WidgetFactories on _ChatRoomScreenState {
         //   createdTime: DateTime.now(),
         // );
 
-        // return VideoMessageBubble(
-        //   videoURL:
-        //       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-        //   isMe: true,
-        //   createdTime: DateTime.now(),
-        // );
-
-        return DocumentMessageBubble(
+        return VideoMessageBubble(
+          videoURL:
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
           isMe: true,
           createdTime: DateTime.now(),
-          documentName: 'SampleDocument.pdf',
-          onTap: onDocumentPressed,
         );
+
+        // return DocumentMessageBubble(
+        //   isMe: true,
+        //   createdTime: DateTime.now(),
+        //   documentName: 'SampleDocument.pdf',
+        //   onTap: onDocumentPressed,
+        // );
       },
     );
   }
@@ -519,12 +526,14 @@ class _Styles {
   static const selectedMediaSize = 70.0;
   static const mediaPreviewSectionSize = 100.0;
 
+  static const callIconSize = Size(30, 30);
+  static const callButtonSize = Size(40, 40);
+
   static const BorderRadius selectedMediaBorderRadius = BorderRadius.all(
     Radius.circular(8.0),
   );
 
   static const EdgeInsets actionPadding = EdgeInsets.only(right: 15.0);
-  static const EdgeInsets actionButtonPadding = EdgeInsets.all(8.0);
   static const EdgeInsets bottomMessageBarPadding = EdgeInsets.all(20.0);
   static const EdgeInsets selectedMediaPadding = EdgeInsets.symmetric(
     vertical: 5,

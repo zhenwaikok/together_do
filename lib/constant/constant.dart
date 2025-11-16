@@ -31,6 +31,9 @@ class EnvValues {
 
   static const youtubeApiKey = String.fromEnvironment('youtube_api_key');
   static const youtubeHostUrl = String.fromEnvironment('youtube_host_url');
+  static const zegoAppID = String.fromEnvironment('zegoAppID');
+  static const appSign = String.fromEnvironment('appSign');
+  static const callIDPrefix = 'call_';
 }
 
 List<SingleChildWidget> providerAssets() => [
