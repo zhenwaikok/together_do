@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mpma_assignment/constant/color_manager.dart';
 import 'package:mpma_assignment/constant/constant.dart';
+import 'package:mpma_assignment/main.dart';
 import 'package:mpma_assignment/router/router.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
-  const App({super.key});
+  final GlobalKey<NavigatorState>? navigatorKey;
+
+  const App({super.key, this.navigatorKey});
 
   @override
   State<App> createState() => _AppState();
@@ -27,7 +30,7 @@ class AppWrapper extends StatefulWidget {
 }
 
 class _AppWrapperState extends State<AppWrapper> {
-  final _router = AppRouter();
+  final _router = AppRouter(navigatorKeys: navigatorKey);
 
   @override
   void initState() {

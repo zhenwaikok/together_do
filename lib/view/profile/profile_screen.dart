@@ -14,6 +14,7 @@ import 'package:mpma_assignment/widget/custom_profile_image.dart';
 import 'package:mpma_assignment/widget/touchable_capacity.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 @RoutePage()
 class ProfileScreen extends StatelessWidget {
@@ -96,7 +97,8 @@ class _ProfileScreenState extends BaseStatefulState<_ProfileScreen> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _ProfileScreenState {
   Future<void> onSignOutPressed() async {
-    tryLoad(context, () => context.read<UserViewModel>().logout());
+    ZegoUIKitPrebuiltCallInvitationService().uninit();
+    await tryLoad(context, () => context.read<UserViewModel>().logout());
   }
 
   Future<void> onEditProfilePressed() async {
